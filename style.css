@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Moon+Dance&display=swap');
+
+* {
+    margin: 0%;
+    font-family: 'Moon Dance', cursive;
+    color: #f0f0f0;
+}
+
+#content {
+    display: grid;
+    grid-template-columns: 1fr 3fr;
+    grid-template-rows: 100vh;
+}
+
+.createTaskbut{
+    font-size: 20px;
+}
+
+button {
+    background-color: #35363a;
+    border-radius: 8px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.canvas{
+    text-align: center;
+    font-size: 30px;
+    background-color: #202124;
+}
+
+.sidebar {
+    text-align: center;
+    font-size: 30px;
+    border-right: 1px solid black;
+    height: 100%;
+    background-color: #35363a;
+    }
