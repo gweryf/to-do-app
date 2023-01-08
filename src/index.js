@@ -1,2 +1,3 @@
-const div = document.getElementById('content')
-div.textContent = 'Hello World'
+import loadbase from "./home";
+
+loadbase()

@@ -1,1 +1,1 @@
-document.getElementById("content").textContent="Hello World";
+(()=>{"use strict";!function(){const t=document.getElementById("content");t.appendChild(function(){const t=document.createElement("div");t.classList.add("sidebar");const e=document.createElement("div");return e.textContent="Projects",t.appendChild(e),t}()),t.appendChild(function(){const t=document.createElement("div");t.classList.add("canvas");const e=document.createElement("button");return e.classList.add("createTaskbut"),e.textContent="+ Add Task",t.appendChild(e),t}())}()})();
