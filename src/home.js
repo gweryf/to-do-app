@@ -120,6 +120,41 @@ function createCanvas(){
     todobod.appendChild(tasks)
     canvas.appendChild(todobod)
 
+    //new task creator
+    const taskcreate = document.createElement('div')
+    const TaskForm = document.createElement('form')
+    TaskForm.action = ""
+    //adding elements of the form
+    const taskInput = document.createElement('input')
+    taskInput.type = 'text'
+    taskInput.classList.add('newlist')
+    taskInput.placeholder = 'new list name'
+    taskInput.ariaLabel = 'new project name'
+    //creating a button to submit the form
+    const newtaskBut = document.createElement('button')
+    newtaskBut.classList.add('btnlist')
+    newtaskBut.textContent = '+'
+    newtaskBut.ariaLabel = 'create new project'
+
+    taskcreate.appendChild(TaskForm)
+    TaskForm.appendChild(taskInput)
+    TaskForm.appendChild(newtaskBut)
+    canvas.appendChild(taskcreate)
+
+
+    const deltodo = document.createElement('div')
+    deltodo.classList.add('delete-stuff')
+    const but1 = document.createElement('button')
+    const but2 = document.createElement('button')
+    but1.classList.add('delbut')
+    but2.classList.add('delbut')
+    but1.textContent = "Clear Completed Tasks"
+    but2.textContent = "Delete List"
+
+    deltodo.appendChild(but1)
+    deltodo.appendChild(but2)
+    canvas.appendChild(deltodo)
+
     return canvas
 }
 
