@@ -12,22 +12,11 @@ function createSidebar(){
 
     //the projects will be in the form of unordered lists
     // i will also be using a class called "active-list" to denote which projects' task to displa on the right
-    const proj1 = document.createElement('li')
-    proj1.classList.add('active-list')
-    proj1.textContent = 'Sample 1'
-    const proj2 = document.createElement('li')
-    proj2.textContent = 'Sample 2'
-    const proj3 = document.createElement('li')
-    proj3.textContent = 'Sample 3'
-
-    //adding the list-items to the actual list
-    projlists.appendChild(proj1)
-    projlists.appendChild(proj2)
-    projlists.appendChild(proj3)
 
     //Here I will be adding a form to create new projects
     const projForm = document.createElement('form')
     projForm.action = ""
+    projForm.classList.add('sidebarForm')
     //adding elements of the form
     const projInput = document.createElement('input')
     projInput.type = 'text'
@@ -162,5 +151,46 @@ function loadbase(){
     const divele = document.getElementById('content')
     divele.appendChild(createSidebar())
     divele.appendChild(createCanvas())
+
+    //here lies the main logic for the website
+    const containerList = document.querySelector('.task-lists')
+    const newProjectForm = document.querySelector('.sidebarForm')
+    const newProjectInput = document.querySelector('.newlist')
+    //creating a list to store projects
+    let lists = []
+
+    newProjectForm.addEventListener('submit',e => {
+        e.preventDefault()
+        const listName = newProjectInput.value
+        if(listName == null||listName ==='') return
+        const list = createProject(listName)
+        newProjectInput.value = null
+        lists.push(list)
+        render()
+    })
+
+    function createProject(name){
+        return {id:Date.now().toString, name: name, tasks:[]}
+    }
+
+    function render() {
+        clearElement(containerList)
+        lists.forEach(list => {
+            const listItem = document.createElement('li')
+            listItem.classList.add('list-name')
+            listItem.dataset.listId = list.id
+            listItem.innerText = list.name
+            containerList.appendChild(listItem)
+        });
+    }
+
+    function clearElement(element){
+        while(element.firstChild) {
+            element.removeChild(element.firstChild)
+        }
+    }
+
+    render()
+    
 }
 export default loadbase
