@@ -36,3 +36,7 @@ button {
     height: 100%;
     background-color: #35363a;
     }
+
+.active-list {
+    text-decoration: underline;
+}

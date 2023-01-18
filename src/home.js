@@ -136,9 +136,9 @@ function createCanvas(){
     const but1 = document.createElement('button')
     const but2 = document.createElement('button')
     but1.classList.add('delbut')
-    but2.classList.add('delbut')
+    but2.classList.add('delprojbut')
     but1.textContent = "Clear Completed Tasks"
-    but2.textContent = "Delete List"
+    but2.textContent = "Delete Project"
 
     deltodo.appendChild(but1)
     deltodo.appendChild(but2)
@@ -156,8 +156,14 @@ function loadbase(){
     const containerList = document.querySelector('.task-lists')
     const newProjectForm = document.querySelector('.sidebarForm')
     const newProjectInput = document.querySelector('.newlist')
+    const delProjectButton = document.querySelector('.delprojbut')
+
+    //local storage keys
+    const LOCAL_STORAGE_PROJECT_KEY = 'task.projects'
+    const LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY = 'task.selectedProjectId'
     //creating a list to store projects
-    let lists = []
+    let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || []
+    let selectedProjectID = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY)
 
     newProjectForm.addEventListener('submit',e => {
         e.preventDefault()
@@ -166,12 +172,29 @@ function loadbase(){
         const list = createProject(listName)
         newProjectInput.value = null
         lists.push(list)
+        save()
+        render()
+    })
+
+    delProjectButton.addEventListener('click', e=>{
+        lists = lists.filter(list => list.id !== selectedProjectID)
+        selectedProjectID = null
+        console.log('oklol');
+        save()
         render()
     })
 
     function createProject(name){
         return {id:Date.now().toString, name: name, tasks:[]}
     }
+
+    containerList.addEventListener('click',e=>{
+        if (e.target.tagName.toLowerCase()==='li') {
+            selectedProjectID = e.target.dataset.listId 
+            save()
+            render()
+        }
+    })
 
     function render() {
         clearElement(containerList)
@@ -180,8 +203,14 @@ function loadbase(){
             listItem.classList.add('list-name')
             listItem.dataset.listId = list.id
             listItem.innerText = list.name
+            if (list.id === selectedProjectID) listItem.classList.add('active-project')
             containerList.appendChild(listItem)
         });
+    }
+
+    function save(){
+        localStorage.setItem(LOCAL_STORAGE_PROJECT_KEY,JSON.stringify(lists))
+        localStorage.setItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY, selectedProjectID)
     }
 
     function clearElement(element){
