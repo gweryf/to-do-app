@@ -16,10 +16,12 @@ function createSidebar(){
     //Here I will be adding a form to create new projects
     const projForm = document.createElement('form')
     projForm.action = ""
+    projForm.setAttribute('data-new-list-form','')
     projForm.classList.add('sidebarForm')
     //adding elements of the form
     const projInput = document.createElement('input')
     projInput.type = 'text'
+    projInput.setAttribute('data-new-list-input','')
     projInput.classList.add('newlist')
     projInput.placeholder = 'new list name'
     projInput.ariaLabel = 'new project name'
@@ -154,8 +156,8 @@ function loadbase(){
 
     //here lies the main logic for the website
     const containerList = document.querySelector('.task-lists')
-    const newProjectForm = document.querySelector('.sidebarForm')
-    const newProjectInput = document.querySelector('.newlist')
+    const newProjectForm = document.querySelector('[data-new-list-form]')
+    const newProjectInput = document.querySelector('[data-new-list-input]')
     const delProjectButton = document.querySelector('.delprojbut')
 
     //local storage keys
