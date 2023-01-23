@@ -187,7 +187,7 @@ function loadbase(){
     })
 
     function createProject(name){
-        return {id:Date.now().toString, name: name, tasks:[]}
+        return {id: Date.now().toString(), name: name, tasks:[]}
     }
 
     containerList.addEventListener('click',e=>{
