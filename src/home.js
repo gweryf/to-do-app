@@ -115,9 +115,11 @@ function createCanvas(){
     const taskcreate = document.createElement('div')
     const TaskForm = document.createElement('form')
     TaskForm.action = ""
+    TaskForm.setAttribute('data-new-task-form','')
     //adding elements of the form
     const taskInput = document.createElement('input')
     taskInput.type = 'text'
+    taskInput.setAttribute('data-new-task-input','')
     taskInput.classList.add('newlist')
     taskInput.placeholder = 'new list name'
     taskInput.ariaLabel = 'new project name'
@@ -162,6 +164,9 @@ function loadbase(){
     const projectDisplayContainer = document.querySelector('.todo-list')
     const projectTitle = document.querySelector('.list-titte')
     const tasksContainer = document.querySelector('.tasks')
+    const taskTemplate = document.getElementById('task-template')
+    const newTaskForm = document.querySelector('[data-new-task-form]')
+    const newTaskInput = document.querySelector('[data-new-task-input]')
 
     //local storage keys
     const LOCAL_STORAGE_PROJECT_KEY = 'task.projects'
@@ -179,6 +184,28 @@ function loadbase(){
         lists.push(list)
         save()
         render()
+    })
+
+    newTaskForm.addEventListener('submit',e => {
+        e.preventDefault()
+        const taskName = newTaskInput.value
+        if(taskName == null||taskName ==='') return
+        const task = createTask(taskName)
+        newTaskInput.value = null
+        const selectedProject = lists.find(list=>list.id===selectedProjectID)
+        selectedProject.tasks.push(task)
+        save()
+        render()
+    })
+
+    function createTask(name){
+        return {id: Date.now().toString(), name: name, complete: false}
+    }
+
+    tasksContainer.addEventListener('click',e=>{
+        if(e.target.tagName.toLowerCase()==='input') {
+            const selectedProject = lists.find()
+        }
     })
 
     delProjectButton.addEventListener('click', e=>{
@@ -217,7 +244,14 @@ function loadbase(){
 
     function renderTasks(selectedProject){
         selectedProject.tasks.forEach(task => {
-            
+            const taskElement = document.importNode(taskTemplate.content, true)
+            const checkbox = taskElement.querySelector('input')
+            checkbox.id = task.id
+            checkbox.checked = task.complete  
+            const label = taskElement.querySelector('label')
+            label.htmlFor = task.id
+            label.append(task.name)
+            tasksContainer.appendChild(taskElement)
         })
     }
 
@@ -247,20 +281,4 @@ function loadbase(){
     
 }
 
-function template(){
-    const temp = document.createElement('template')
-    temp.id = 'task-template'
-    const tempdiv = document.createElement('div')
-    tempdiv.classList.add('task')
-    const taskcheck = document.createElement('input')
-    taskcheck.type = 'checkbox'
-    const tasklabel = document.createElement('label')
-    
-    
-    tempdiv.appendChild(taskcheck)
-    tempdiv.appendChild(tasklabel)
-    temp.appendChild(tempdiv)
-    return temp
-}
-
-export{loadbase,template}
+export default loadbase
