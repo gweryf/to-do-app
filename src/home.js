@@ -167,6 +167,7 @@ function loadbase(){
     const taskTemplate = document.getElementById('task-template')
     const newTaskForm = document.querySelector('[data-new-task-form]')
     const newTaskInput = document.querySelector('[data-new-task-input]')
+    const clearCompleteTaskBut = document.querySelector('.delbut')
 
     //local storage keys
     const LOCAL_STORAGE_PROJECT_KEY = 'task.projects'
@@ -174,6 +175,13 @@ function loadbase(){
     //creating a list to store projects
     let lists = JSON.parse(localStorage.getItem(LOCAL_STORAGE_PROJECT_KEY)) || []
     let selectedProjectID = localStorage.getItem(LOCAL_STORAGE_SELECTED_PROJECT_ID_KEY)
+
+    clearCompleteTaskBut.addEventListener('click',e => {
+        const selectedProject = lists.find(list => list.id === selectedProjectID)
+        selectedProject.tasks = selectedProject.tasks.filter(task=>!task.complete)
+        save()
+        render()
+    })
 
     newProjectForm.addEventListener('submit',e => {
         e.preventDefault()
@@ -204,7 +212,10 @@ function loadbase(){
 
     tasksContainer.addEventListener('click',e=>{
         if(e.target.tagName.toLowerCase()==='input') {
-            const selectedProject = lists.find()
+            const selectedProject = lists.find(list => list.id === selectedProjectID)
+            const selectedTask = selectedProject.tasks.find(task=>task.id === e.target.id)
+            selectedTask.complete = e.target.checked
+            save()
         }
     })
 
