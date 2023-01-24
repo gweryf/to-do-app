@@ -159,6 +159,9 @@ function loadbase(){
     const newProjectForm = document.querySelector('[data-new-list-form]')
     const newProjectInput = document.querySelector('[data-new-list-input]')
     const delProjectButton = document.querySelector('.delprojbut')
+    const projectDisplayContainer = document.querySelector('.todo-list')
+    const projectTitle = document.querySelector('.list-titte')
+    const tasksContainer = document.querySelector('.tasks')
 
     //local storage keys
     const LOCAL_STORAGE_PROJECT_KEY = 'task.projects'
@@ -200,6 +203,25 @@ function loadbase(){
 
     function render() {
         clearElement(containerList)
+        renderProject()
+        const selectedProject = lists.find(list => list.id === selectedProjectID)
+        if (selectedProjectID == null){
+            projectDisplayContainer.style.display = 'none'
+        } else {
+            projectDisplayContainer.style.display = ''
+            projectTitle.innerText = selectedProject.name
+            clearElement(tasksContainer)
+            renderTasks(selectedProject)
+        }
+    }
+
+    function renderTasks(selectedProject){
+        selectedProject.tasks.forEach(task => {
+            
+        })
+    }
+
+    function renderProject() {
         lists.forEach(list => {
             const listItem = document.createElement('li')
             listItem.classList.add('list-name')
@@ -224,4 +246,21 @@ function loadbase(){
     render()
     
 }
-export default loadbase
+
+function template(){
+    const temp = document.createElement('template')
+    temp.id = 'task-template'
+    const tempdiv = document.createElement('div')
+    tempdiv.classList.add('task')
+    const taskcheck = document.createElement('input')
+    taskcheck.type = 'checkbox'
+    const tasklabel = document.createElement('label')
+    
+    
+    tempdiv.appendChild(taskcheck)
+    tempdiv.appendChild(tasklabel)
+    temp.appendChild(tempdiv)
+    return temp
+}
+
+export{loadbase,template}
