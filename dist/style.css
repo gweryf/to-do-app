@@ -38,7 +38,8 @@
     background: transparent;
     border: none;
     font-size: medium;
-    border-bottom: solid;
+    border-bottom: 1px solid white;
+    outline: none;
 }
 
 button {
