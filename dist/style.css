@@ -69,6 +69,48 @@ button {
     background-color: #202124;
 }
 
+.task{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border: 1px solid white;
+    border-radius: 15px;
+    padding: 10px;
+    margin-right: 20px;
+    margin-left: 20px;
+    justify-content: space-around;
+    margin-bottom: 10px;
+}
+.task label {
+    cursor: pointer;
+    display: flex;
+}
+.task input[type='checkbox']{
+    cursor: pointer;
+    opacity: 0;
+    position: absolute;
+}
+.task label::before{
+    content: '';
+    width: 35px;
+    border-radius: 50%;
+    margin-right: .5em;
+    border: 1px solid rgb(221, 221, 221);
+}
+.task label:hover::before,
+.task input[type='checkbox']:hover + label::before {
+    background-color: #35E07D;
+}
+.task input[type='checkbox']:checked + label::before {
+    content: '\002714';
+    background-color: #27AE60;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
 .sidebar {
     text-align: center;
     font-size: 30px;
