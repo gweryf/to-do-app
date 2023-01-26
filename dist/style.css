@@ -16,6 +16,31 @@
     font-size: 20px;
 }
 
+.task-lists {
+    list-style: none;
+    cursor: pointer;
+}
+
+.list-name {
+    transition-duration: 0.2s;
+}
+
+.list-name:hover {
+    transform: scale(1.1);
+    transition-duration: 0.2s;
+}
+
+.active-project {
+    font-weight: 900;
+}
+
+.newlist {
+    background: transparent;
+    border: none;
+    font-size: medium;
+    border-bottom: solid;
+}
+
 button {
     background-color: #35363a;
     border-radius: 8px;
