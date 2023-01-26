@@ -122,3 +122,38 @@ button {
 .active-list {
     text-decoration: underline;
 }
+
+.delete-stuff {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+}
+
+.delbut {
+    cursor: pointer;
+    font-size: medium;
+    border: 0;
+    background: 0;
+    transition-duration: 0.2s;
+}
+.delbut:hover {
+    opacity: 0.8;
+    background: #35363a;
+    transform: scale(1.1);
+    transition-duration: 0.2s;
+}
+
+.delprojbut {
+    cursor: pointer;
+    font-size: medium;
+    border: 0;
+    background: 0;
+}
+.delprojbut:hover {
+    opacity: 0.8;
+    background: #35363a;
+    transform: scale(1.1);
+    transition-duration: 0.2s;
+}
