@@ -2,7 +2,7 @@
 ![Files](https://img.shields.io/github/directory-file-count/gweryf/to-do-app)
 ![Files](https://img.shields.io/github/repo-size/gweryf/to-do-app)
 ![Files](https://img.shields.io/twitter/follow/gweryf?style=social)
-[![LinkedIn][linkedin-shield]](https://www.linkedin.com/in/shrivastavpriyam/)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect!-blue)](https://www.linkedin.com/in/shrivastavpriyam/)
 
 <br />
 
